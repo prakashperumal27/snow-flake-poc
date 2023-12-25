@@ -4,13 +4,13 @@ import com.snowflake.snowpark.Session
 class SnowflakeClient {
 
     val snowflakeConf: Map[String, String] = Map(
-      "URL" -> "https://procoreit.snowflakecomputing.com:443",
-      "USER" -> "prakash.perumal-contractor@procore.com",
-      "PASSWORD" -> "27@Jun@2023",
-      "ROLE" -> "PDP_ENGINEER_ROLE",
-      "WAREHOUSE" -> "LATENTVIEW_ENGINEER_LARGE_WH",
-      "DB" -> "PDP_MDM_DEV_PRAKASH",
-      "SCHEMA" -> "MASTER_COMPANIES"
+      "URL" -> sys.env.get("account").getOrElse(),
+      "USER" -> sys.env.get("username").getOrElse(),
+      "PASSWORD" -> sys.env.get("password").getOrElse(),
+      "ROLE" -> sys.env.get("role").getOrElse(),
+      "WAREHOUSE" -> sys.env.get("warehouse").getOrElse(),
+      "DB" -> sys.env.get("database").getOrElse(),
+      "SCHEMA" -> sys.env.get("schema").getOrElse(),
     )
 
     val sfSession = Session.builder.configs(snowflakeConf).create
